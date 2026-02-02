@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load home %}
+
+{% block content %}
+<section class="container mt-5">
+    <h1 class="mb-4">Payment</h1>
+
+    <div class="checkout-steps" style="margin-bottom: 2rem;">
+        <div class="checkout-step">
+            <div class="step-circle">1</div>
+            <p class="step-label">Review Order</p>
+        </div>
+        <div class="checkout-step">
+            <div class="step-circle">2</div>
+            <p class="step-label">Shipping Address</p>
+        </div>
+        <div class="checkout-step active">
+            <div class="step-circle">3</div>
+            <p class="step-label">Payment</p>
+        </div>
+        <div class="checkout-step">
+            <div class="step-circle">4</div>
+            <p class="step-label">Confirmation</p>
+        </div>
+    </div>
+
+    <div class="cart-container">
+        <div style="background: var(--accent); border: 1px solid var(--border); border-radius: 8px; padding: 2rem;">
+            <h5 style="margin-bottom: 1.5rem;">Payment Method</h5>
+            
+            <form method="POST" action="{% url 'process_payment' %}">
+                {% csrf_token %}
+                <input type="hidden" name="address_id" value="{{ address_id }}">
+                
+                <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                    <label style="display: flex; align-items: center; padding: 1rem; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;"
+                           onmouseover="this.style.borderColor='var(--primary)'" 
+                           onmouseout="this.style.borderColor='var(--border)'">
+                        <input type="radio" name="payment_method" value="credit_card" required>
+                        <span style="margin-left: 1rem; font-weight: 600;">Credit/Debit Card</span>
+                    </label>
+                    
+                    <label style="display: flex; align-items: center; padding: 1rem; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;"
+                           onmouseover="this.style.borderColor='var(--primary)'" 
+                           onmouseout="this.style.borderColor='var(--border)'">
+                        <input type="radio" name="payment_method" value="paypal" required>
+                        <span style="margin-left: 1rem; font-weight: 600;">PayPal</span>
+                    </label>
+                    
+                    <label style="display: flex; align-items: center; padding: 1rem; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.3s ease;"
+                           onmouseover="this.style.borderColor='var(--primary)'" 
+                           onmouseout="this.style.borderColor='var(--border)'">
+                        <input type="radio" name="payment_method" value="bank_transfer" required>
+                        <span style="margin-left: 1rem; font-weight: 600;">Bank Transfer</span>
+                    </label>
+                </div>
+
+                <div id="cardDetails" style="display: none; margin-bottom: 2rem;">
+                    <h6 style="margin-bottom: 1rem;">Card Details</h6>
+                    
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label class="form-label">Cardholder Name</label>
+                        <input type="text" class="form-control" placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label class="form-label">Card Number</label>
+                        <input type="text" class="form-control" placeholder="4111 1111 1111 1111" maxlength="19">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Expiry Date</label>
+                            <input type="text" class="form-control" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">CVV</label>
+                            <input type="text" class="form-control" placeholder="123" maxlength="3">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-success w-100" style="margin-bottom: 0.5rem;">Complete Payment</button>
+            </form>
+            
+            <a href="{% url 'select_address' %}" class="btn btn-outline-primary w-100">Back</a>
+        </div>
+
+        <div class="cart-summary">
+            <h5 style="margin-bottom: 1.5rem;">Order Summary</h5>
+            
+            <div style="max-height: 300px; overflow-y: auto; margin-bottom: 1rem;">
+                {% for item in cart_items %}
+                    <div style="padding: 0.75rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
+                        <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                        <span>${{ item.product.price|multiply:item.quantity|floatformat:2 }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span>${{ total|floatformat:2 }}</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Shipping:</span>
+                <span>$0.00</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Tax (8%):</span>
+                <span>${{ total|multiply:0.08|floatformat:2 }}</span>
+            </div>
+            
+            <div class="summary-row total">
+                <span>Total:</span>
+                <span>${{ total|multiply:1.08|floatformat:2 }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const cardDetails = document.getElementById('cardDetails');
+        if (this.value === 'credit_card') {
+            cardDetails.style.display = 'block';
+        } else {
+            cardDetails.style.display = 'none';
+        }
+    });
+});
+</script>
+{% endblock %}

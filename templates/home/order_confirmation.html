@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load home %}
+
+{% block content %}
+<section class="container mt-5">
+    <div style="text-align: center; padding: 3rem 0;">
+        <div style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;">✓</div>
+        <h1 style="margin-bottom: 0.5rem;">Order Confirmed!</h1>
+        <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem;">Thank you for your purchase</p>
+    </div>
+
+    <div class="checkout-steps" style="margin-bottom: 2rem;">
+        <div class="checkout-step">
+            <div class="step-circle">1</div>
+            <p class="step-label">Review Order</p>
+        </div>
+        <div class="checkout-step">
+            <div class="step-circle">2</div>
+            <p class="step-label">Shipping Address</p>
+        </div>
+        <div class="checkout-step">
+            <div class="step-circle">3</div>
+            <p class="step-label">Payment</p>
+        </div>
+        <div class="checkout-step active">
+            <div class="step-circle">4</div>
+            <p class="step-label">Confirmation</p>
+        </div>
+    </div>
+
+    <div class="cart-container">
+        <div style="background: var(--accent); border: 1px solid var(--border); border-radius: 8px; padding: 2rem;">
+            <h5 style="margin-bottom: 1rem;">Order Details</h5>
+            
+            <div style="background: var(--light-gray); padding: 1rem; border-radius: 4px; margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                    <span style="font-weight: 600;">Order ID:</span>
+                    <span>#{{ order.id }}</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                    <span style="font-weight: 600;">Order Date:</span>
+                    <span>{{ order.created_at|date:"M d, Y" }}</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                    <span style="font-weight: 600;">Status:</span>
+                    <span style="background: var(--warning); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem;">{{ order.status|upper }}</span>
+                </div>
+            </div>
+
+            <h6 style="margin-bottom: 1rem; margin-top: 2rem;">Items Ordered</h6>
+            
+            {% for item in order_items %}
+                <div style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--border);">
+                    <div>
+                        <p style="font-weight: 600; margin-bottom: 0.25rem;">{{ item.product.name }}</p>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Qty: {{ item.quantity }} × ${{ item.price|floatformat:2 }}</p>
+                    </div>
+                    <p style="font-weight: 600;">${{ item.price|multiply:item.quantity|floatformat:2 }}</p>
+                </div>
+            {% endfor %}
+            
+            <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                <a href="{% url 'home' %}" class="btn btn-primary flex-grow-1">Continue Shopping</a>
+                <a href="{% url 'profile' %}" class="btn btn-secondary flex-grow-1">View My Orders</a>
+            </div>
+        </div>
+
+        <div class="cart-summary">
+            <h5 style="margin-bottom: 1.5rem;">Order Summary</h5>
+            
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span>${{ order.total_price|floatformat:2 }}</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Shipping:</span>
+                <span>$0.00</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Tax (8%):</span>
+                <span>${{ order.total_price|multiply:0.08|floatformat:2 }}</span>
+            </div>
+            
+            <div class="summary-row total">
+                <span>Total Paid:</span>
+                <span>${{ order.total_price|multiply:1.08|floatformat:2 }}</span>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1rem; background: var(--light-gray); border-radius: 4px;">
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;">Delivery Address:</p>
+                <p style="font-weight: 600;">{{ order.delivery_address }}</p>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                <p style="font-size: 0.85rem; color: var(--text-light); text-align: center;">
+                    A confirmation email has been sent to your email address.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

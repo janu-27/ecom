@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load home %}
+
+{% block content %}
+<section class="container mt-5">
+    <h1 class="mb-4">Shopping Cart</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if cart_items %}
+        <div class="cart-container">
+            <div class="cart-items">
+                {% for item in cart_items %}
+                    <div class="cart-item">
+                        {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;">
+                        {% else %}
+                        <div style="width: 100px; height: 100px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; border-radius: 4px; color: #cccccc;">
+                            <i class="fas fa-image" style="font-size: 2rem;"></i>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="cart-item-details">
+                            <h5 class="cart-item-title">{{ item.product.name }}</h5>
+                            <p class="cart-item-price">${{ item.product.price|floatformat:2 }}</p>
+                            
+                            <form method="POST" action="{% url 'update_cart_item' item.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <div class="quantity-selector">
+                                    <button type="button" onclick="decrementQty(this)">−</button>
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" class="qty-input">
+                                    <button type="button" onclick="incrementQty(this)">+</button>
+                                    <button type="submit" class="btn btn-sm btn-primary" style="margin-left: 1rem;">Update</button>
+                                </div>
+                            </form>
+                            
+                            <form method="POST" action="{% url 'remove_from_cart' item.id %}" style="display: inline; margin-left: 1rem;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                            </form>
+                        </div>
+                        
+                        <div style="text-align: right;">
+                            <p style="font-weight: 600; font-size: 1.1rem;">${{ item.product.price|multiply:item.quantity|floatformat:2 }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="cart-summary">
+                <h5 style="margin-bottom: 1.5rem;">Order Summary</h5>
+                
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span>${{ total|floatformat:2 }}</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Shipping:</span>
+                    <span>$0.00</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Tax:</span>
+                    <span>${{ total|multiply:0.08|floatformat:2 }}</span>
+                </div>
+                
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span>${{ total|multiply:1.08|floatformat:2 }}</span>
+                </div>
+                
+                <a href="{% url 'checkout' %}" class="btn btn-primary w-100" style="margin-top: 1rem;">Proceed to Checkout</a>
+                <a href="{% url 'products' %}" class="btn btn-outline-primary w-100" style="margin-top: 0.5rem;">Continue Shopping</a>
+            </div>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 3rem 0;">
+            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem;">Your cart is empty</p>
+            <a href="{% url 'products' %}" class="btn btn-primary btn-lg">Start Shopping</a>
+        </div>
+    {% endif %}
+</section>
+
+<script>
+function incrementQty(btn) {
+    const input = btn.parentElement.querySelector('.qty-input');
+    input.value = parseInt(input.value) + 1;
+}
+
+function decrementQty(btn) {
+    const input = btn.parentElement.querySelector('.qty-input');
+    if (input.value > 1) {
+        input.value = parseInt(input.value) - 1;
+    }
+}
+</script>
+
+{% endblock %}

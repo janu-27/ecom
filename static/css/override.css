@@ -1,0 +1,541 @@
+/* =====================================================
+   ULTIMATE BLACK & WHITE OVERRIDE
+   Kill ALL Bootstrap Colors - 100% Pure B&W Only
+   ===================================================== */
+
+/* KILL ALL BLUE/PURPLE/GRADIENT COLORS */
+* {
+    --bs-primary: #000000 !important;
+    --bs-secondary: #1a1a1a !important;
+    --bs-light: #f5f5f5 !important;
+    --bs-dark: #000000 !important;
+    --bs-danger: #e74c3c !important;
+    --bs-success: #27ae60 !important;
+    --bs-warning: #f39c12 !important;
+    --bs-info: #000000 !important;
+}
+
+/* HERO SECTION - PURE BLACK */
+.hero-section {
+    background: #000000 !important;
+    color: white !important;
+}
+
+.hero-section h1 {
+    color: white !important;
+}
+
+.hero-section p {
+    color: #d0d0d0 !important;
+}
+
+/* SECTIONS - BLACK OR LIGHT GRAY ONLY */
+section {
+    background: white !important;
+}
+
+section.light {
+    background: #f5f5f5 !important;
+}
+
+section.dark {
+    background: #000000 !important;
+    color: white !important;
+}
+
+/* ALL HEADINGS - BLACK ONLY */
+h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
+}
+
+section.dark h1, section.dark h2, section.dark h3, section.dark h4, section.dark h5, section.dark h6 {
+    color: white !important;
+}
+
+/* BOOTSTRAP BUTTONS */
+.btn-primary {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: #1a1a1a !important;
+    border-color: #1a1a1a !important;
+    color: white !important;
+}
+
+.btn-secondary {
+    background-color: #1a1a1a !important;
+    border-color: #1a1a1a !important;
+    color: white !important;
+}
+
+.btn-outline-primary {
+    color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #000000 !important;
+    color: white !important;
+}
+
+.btn-success {
+    background-color: #27ae60 !important;
+    border-color: #27ae60 !important;
+    color: white !important;
+}
+
+.btn-danger {
+    background-color: #e74c3c !important;
+    border-color: #e74c3c !important;
+    color: white !important;
+}
+
+/* BADGES */
+.badge {
+    background-color: #000000 !important;
+    color: white !important;
+}
+
+.badge.bg-primary {
+    background-color: #000000 !important;
+}
+
+.badge.bg-danger {
+    background-color: #e74c3c !important;
+}
+
+.badge.bg-success {
+    background-color: #27ae60 !important;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #000000 !important;
+}
+
+.navbar-dark {
+    background-color: #000000 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.nav-link {
+    color: #d0d0d0 !important;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+/* TEXT COLORS */
+.text-primary {
+    color: #000000 !important;
+}
+
+.text-secondary {
+    color: #1a1a1a !important;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.text-dark {
+    color: #000000 !important;
+}
+
+.text-muted {
+    color: #666666 !important;
+}
+
+.text-info {
+    color: #000000 !important;
+}
+
+.text-danger {
+    color: #e74c3c !important;
+}
+
+.text-success {
+    color: #27ae60 !important;
+}
+
+.text-warning {
+    color: #f39c12 !important;
+}
+
+/* BACKGROUND COLORS */
+.bg-primary {
+    background-color: #000000 !important;
+}
+
+.bg-secondary {
+    background-color: #1a1a1a !important;
+}
+
+.bg-white {
+    background-color: white !important;
+}
+
+.bg-light {
+    background-color: #f5f5f5 !important;
+}
+
+.bg-dark {
+    background-color: #000000 !important;
+}
+
+.bg-info {
+    background-color: #000000 !important;
+}
+
+.bg-danger {
+    background-color: #e74c3c !important;
+}
+
+/* FORMS */
+.form-control {
+    border: 1px solid #cccccc !important;
+    background-color: white !important;
+    color: #000000 !important;
+}
+
+.form-control:focus {
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
+    background-color: white !important;
+    color: #000000 !important;
+}
+
+.form-select {
+    border: 1px solid #cccccc !important;
+    background-color: white !important;
+    color: #000000 !important;
+}
+
+.form-select:focus {
+    border-color: #000000 !important;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
+    background-color: white !important;
+    color: #000000 !important;
+}
+
+.form-label {
+    color: #000000 !important;
+}
+
+/* FOOTER */
+footer {
+    background-color: #000000 !important;
+    color: white !important;
+}
+
+footer a {
+    color: #d0d0d0 !important;
+}
+
+footer a:hover {
+    color: white !important;
+}
+
+/* PAGINATION */
+.page-link {
+    background-color: white !important;
+    border-color: #cccccc !important;
+    color: #000000 !important;
+}
+
+.page-link:hover {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: white !important;
+}
+
+.page-link.active {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+/* ALERTS */
+.alert-primary {
+    background-color: #e7f3ff !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+}
+
+.alert-secondary {
+    background-color: #e9ecef !important;
+    border-color: #1a1a1a !important;
+    color: #000000 !important;
+}
+
+.alert-success {
+    background-color: #d4edda !important;
+    border-color: #27ae60 !important;
+    color: #155724 !important;
+}
+
+.alert-danger {
+    background-color: #f8d7da !important;
+    border-color: #e74c3c !important;
+    color: #721c24 !important;
+}
+
+.alert-warning {
+    background-color: #fff3cd !important;
+    border-color: #f39c12 !important;
+    color: #856404 !important;
+}
+
+.alert-info {
+    background-color: #d1ecf1 !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+}
+
+/* LINKS */
+a {
+    color: #000000 !important;
+}
+
+a:hover {
+    color: #4d4d4d !important;
+}
+
+/* BORDERS */
+.border-primary {
+    border-color: #000000 !important;
+}
+
+.border-light {
+    border-color: #f5f5f5 !important;
+}
+
+.border-dark {
+    border-color: #000000 !important;
+}
+
+/* CARD STYLES */
+.card {
+    background-color: white !important;
+    border-color: #cccccc !important;
+}
+
+.card-header {
+    background-color: #f5f5f5 !important;
+    border-color: #cccccc !important;
+    color: #000000 !important;
+}
+
+/* BREADCRUMB */
+.breadcrumb {
+    background-color: white !important;
+}
+
+.breadcrumb-item.active {
+    color: #000000 !important;
+}
+
+.breadcrumb-item a {
+    color: #000000 !important;
+}
+
+/* DROPDOWN */
+.dropdown-menu {
+    background-color: white !important;
+    border-color: #cccccc !important;
+}
+
+.dropdown-item {
+    color: #000000 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5 !important;
+    color: #000000 !important;
+}
+
+/* MODAL */
+.modal-content {
+    background-color: white !important;
+    border-color: #cccccc !important;
+}
+
+.modal-header {
+    background-color: #000000 !important;
+    color: white !important;
+    border-color: #cccccc !important;
+}
+
+.modal-body {
+    background-color: white !important;
+    color: #000000 !important;
+}
+
+.close {
+    color: white !important;
+}
+
+/* TABLES */
+table {
+    background-color: white !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f5f5f5 !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5 !important;
+}
+
+/* INPUT GROUPS */
+.input-group-text {
+    background-color: #f5f5f5 !important;
+    border-color: #cccccc !important;
+    color: #000000 !important;
+}
+
+/* PROGRESS BARS */
+.progress {
+    background-color: #e9ecef !important;
+}
+
+.progress-bar {
+    background-color: #000000 !important;
+}
+
+/* SPINNERS */
+.spinner-border {
+    border-color: #f5f5f5 !important;
+    border-top-color: #000000 !important;
+}
+
+/* TOOLTIPS & POPOVERS */
+.tooltip-inner {
+    background-color: #000000 !important;
+    color: white !important;
+}
+
+.popover {
+    background-color: white !important;
+    border-color: #cccccc !important;
+}
+
+.popover-header {
+    background-color: #000000 !important;
+    color: white !important;
+    border-color: #cccccc !important;
+}
+
+.popover-body {
+    color: #000000 !important;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    background-color: white !important;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f5f5f5 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #cccccc !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #4d4d4d !important;
+}
+
+/* REMOVE ALL GRADIENTS */
+.hero-section,
+.jumbotron,
+.carousel-inner {
+    background-image: none !important;
+    background: #000000 !important;
+}
+
+/* PRODUCT CARDS */
+.product-card {
+    background-color: white !important;
+    border: 1px solid #cccccc !important;
+}
+
+.product-image {
+    background-color: #f5f5f5 !important;
+}
+
+.product-title {
+    color: #000000 !important;
+}
+
+.product-price {
+    color: #000000 !important;
+}
+
+.product-rating {
+    color: #000000 !important;
+}
+
+/* CART & CHECKOUT */
+.cart-summary {
+    background-color: #f5f5f5 !important;
+    border: 1px solid #cccccc !important;
+}
+
+.checkout-steps {
+    background-color: white !important;
+}
+
+.step-circle.active {
+    background-color: #000000 !important;
+    color: white !important;
+    border-color: #000000 !important;
+}
+
+/* CHATBOT */
+.chatbot-container {
+    background-color: white !important;
+    border: 2px solid #000000 !important;
+}
+
+.chatbot-header {
+    background-color: #000000 !important;
+    color: white !important;
+}
+
+.chatbot-messages {
+    background-color: #f5f5f5 !important;
+}
+
+#send-btn {
+    background-color: #000000 !important;
+    color: white !important;
+}
+
+/* FORCE WHITE BACKGROUND ON BODY */
+body {
+    background-color: white !important;
+}
+
+html {
+    background-color: white !important;
+}
+
+/* MAKE SURE NO BLUE SHOWS UP ANYWHERE */
+.btn-info,
+.text-info,
+.bg-info,
+.border-info,
+.alert-info {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: white !important;
+}

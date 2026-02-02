@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load home %}
+
+{% block content %}
+<section class="container mt-5">
+    <h1 class="mb-4">Checkout</h1>
+
+    <div class="checkout-steps">
+        <div class="checkout-step active">
+            <div class="step-circle">1</div>
+            <p class="step-label">Review Order</p>
+        </div>
+        <div class="checkout-step">
+            <div class="step-circle">2</div>
+            <p class="step-label">Shipping Address</p>
+        </div>
+        <div class="checkout-step">
+            <div class="step-circle">3</div>
+            <p class="step-label">Payment</p>
+        </div>
+        <div class="checkout-step">
+            <div class="step-circle">4</div>
+            <p class="step-label">Confirmation</p>
+        </div>
+    </div>
+
+    <div class="cart-container" style="margin-top: 2rem;">
+        <div class="cart-items">
+            <h5 style="margin-bottom: 1.5rem;">Order Items</h5>
+            
+            {% for item in cart_items %}
+                <div class="cart-item">
+                    {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;">
+                    {% else %}
+                    <div style="width: 100px; height: 100px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; border-radius: 4px; color: #cccccc;">
+                        <i class="fas fa-image" style="font-size: 2rem;"></i>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="cart-item-details">
+                        <h5 class="cart-item-title">{{ item.product.name }}</h5>
+                        <p class="cart-item-price">Qty: {{ item.quantity }} × ${{ item.product.price|floatformat:2 }}</p>
+                    </div>
+                    
+                    <div style="text-align: right;">
+                        <p style="font-weight: 600;">${{ item.product.price|multiply:item.quantity|floatformat:2 }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="cart-summary">
+            <h5 style="margin-bottom: 1.5rem;">Order Summary</h5>
+            
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span>${{ total|floatformat:2 }}</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Shipping:</span>
+                <span>$0.00</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Tax (8%):</span>
+                <span>${{ total|multiply:0.08|floatformat:2 }}</span>
+            </div>
+            
+            <div class="summary-row total">
+                <span>Total:</span>
+                <span>${{ total|multiply:1.08|floatformat:2 }}</span>
+            </div>
+            
+            <a href="{% url 'select_address' %}" class="btn btn-primary w-100" style="margin-top: 1rem;">Continue to Shipping</a>
+            <a href="{% url 'view_cart' %}" class="btn btn-outline-primary w-100" style="margin-top: 0.5rem;">Back to Cart</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
